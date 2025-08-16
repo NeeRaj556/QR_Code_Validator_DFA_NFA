@@ -1,0 +1,74 @@
+# QR Image Validator (DFA/NFA) - Windows Setup + Dependencies
+# ------------------------------------------------------------
+# This project runs a FastAPI web app that:
+#  - Accepts a QR image upload
+#  - Decodes QR text with OpenCV
+#  - Validates the payload via DFA or NFA
+#  - Generates Graphviz state diagrams showing validation paths
+#
+# Recommended Windows environment
+#  - OS: Windows 10/11 (64-bit)
+#  - Python: 3.11 or 3.12 (64-bit, from python.org)
+#    (Wheels are available for all packages below; 3.13 also works but may build numpy)
+#  - Graphviz: Install from https://graphviz.org/download/ or Chocolatey
+#
+# How to install (PowerShell)
+#  1) Install Graphviz system package:
+#       - Option A: Download from https://graphviz.org/download/
+#       - Option B: Using Chocolatey: choco install graphviz
+#  2) Navigate to the project folder
+#  3) Create & activate a virtual environment
+#       py -3.12 -m venv .venv
+#       .\.venv\Scripts\Activate.ps1
+#     - If activation is blocked, use CMD:
+#       .\.venv\Scripts\activate.bat
+#  4) Upgrade pip and install dependencies
+#       python -m pip install --upgrade pip
+#       python -m pip install -r requirements.txt
+#  5) Run the server
+#       python -m uvicorn web_app:app --port 8000
+#     Then open: http://127.0.0.1:8000
+#  6) Quick test
+#     - On the web page, use "Quick Test" buttons to scan built-in example QR images.
+#     - You should see visual state diagrams showing the DFA/NFA validation paths!
+#
+# Notes
+#  - No additional Python packages needed for Graphviz; we use subprocess to call 'dot'.
+#  - If port 8000 is busy, use a different port, e.g. --port 8001.
+#  - If using Python 3.13 and pip builds numpy from source on your machine,
+#    prefer installing Python 3.12 to use prebuilt wheels.
+#  - If Graphviz is not installed, diagrams won't show but validation still works.
+
+# --- Runtime dependencies ---
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.17
+
+# QR generation & image handling
+qrcode[pil]==7.4.2
+pillow==11.3.0
+
+# QR decoding stack
+opencv-python==4.10.0.84
+numpy==2.0.2
+
+# --- (Optional) Dev/Test tools ---
+# pytest==7.4.3
+# pytest-cov==4.1.0
+
+# --- Runtime dependencies ---
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.17
+
+# QR generation & image handling
+qrcode[pil]==7.4.2
+pillow==11.3.0
+
+# QR decoding stack
+opencv-python==4.10.0.84
+numpy==2.0.2
+
+# --- (Optional) Dev/Test tools ---
+# pytest==7.4.3
+# pytest-cov==4.1.0
